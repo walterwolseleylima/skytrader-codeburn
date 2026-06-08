@@ -1,0 +1,21 @@
+{
+  "_comment": "Precos Anthropic em USD por 1M tokens. Cache read = 10% input. Cache write 5m = 1.25x input. Cache write 1h = 2x input. Confira os valores atuais em https://www.anthropic.com/pricing e ajuste usd_brl pra sua moeda.",
+  "_updated": "2026-04-19",
+  "models": {
+    "claude-opus-4-7": {"input": 15.0, "output": 75.0, "tier_1m_input": 25.0, "tier_1m_output": 125.0},
+    "claude-opus-4-6": {"input": 15.0, "output": 75.0, "tier_1m_input": 25.0, "tier_1m_output": 125.0},
+    "claude-opus-4-5": {"input": 15.0, "output": 75.0},
+    "claude-opus-4-1": {"input": 15.0, "output": 75.0},
+    "claude-opus-4":   {"input": 15.0, "output": 75.0},
+    "claude-sonnet-4-6": {"input": 3.0, "output": 15.0, "tier_1m_input": 6.0, "tier_1m_output": 22.5},
+    "claude-sonnet-4-5": {"input": 3.0, "output": 15.0, "tier_1m_input": 6.0, "tier_1m_output": 22.5},
+    "claude-sonnet-4":   {"input": 3.0, "output": 15.0},
+    "claude-haiku-4-5": {"input": 1.0, "output": 5.0},
+    "claude-haiku-4":   {"input": 1.0, "output": 5.0},
+    "claude-3-5-sonnet": {"input": 3.0, "output": 15.0},
+    "claude-3-5-haiku":  {"input": 0.80, "output": 4.0},
+    "claude-3-opus":     {"input": 15.0, "output": 75.0},
+    "_fallback":          {"input": 3.0, "output": 15.0}
+  },
+  "usd_brl": 5.80
+}

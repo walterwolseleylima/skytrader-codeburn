@@ -1,0 +1,19 @@
+# Dados gerados localmente · NUNCA versionar
+report.html
+*.report.html
+.session_map_cache.json
+audit/
+out.json
+*.out.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
