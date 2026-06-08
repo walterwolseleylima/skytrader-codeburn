@@ -6,6 +6,10 @@ Ele lê os logs de sessão que o Claude Code já grava na sua máquina, estima o
 
 ![CodeBurn](https://img.shields.io/badge/python-3.10%2B-blue) ![deps](https://img.shields.io/badge/depend%C3%AAncias-zero-green)
 
+![Dashboard do CodeBurn](docs/dashboard.png)
+
+*Exemplo com dados de demonstração.*
+
 ## Antes de tudo: isso não é a sua fatura
 
 Se você usa Claude Pro ou Max, paga assinatura fixa por mês, não por token. Os valores em dólar que aparecem aqui são o **equivalente se você estivesse pagando via API**. Serve como termômetro de intensidade de uso, ótimo pra comparar um projeto com o outro e enxergar onde o consumo está concentrado. Não trate como conta a pagar.
