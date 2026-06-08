@@ -306,6 +306,8 @@ def fmt_m(v): return f"{v/1_000_000:,.2f} M".replace(".", ",") if v >= 1_000_000
 
 def render_html(agg: dict, outpath: Path):
     usd_brl = PRICING["usd_brl"]
+    priced_at = PRICING.get("_updated", "")
+    priced_label = f" (preços conferidos em {priced_at})" if priced_at else ""
     total = agg["total"]
     brl_total = total["cost"] * usd_brl
 
@@ -502,7 +504,7 @@ def render_html(agg: dict, outpath: Path):
   <tbody>{session_rows()}</tbody>
 </table>
 
-<div class="footer">CodeBurn · pricing configurável em <code>pricing.json</code>.</div>
+<div class="footer">CodeBurn · pricing configurável em <code>pricing.json</code>{priced_label}.</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>

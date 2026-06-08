@@ -1,61 +1,65 @@
 # CodeBurn
 
-Um dashboard simples pra ver quanto de token o seu Claude Code está queimando, projeto por projeto.
+> [English](README.md) · [Português](README.pt-BR.md)
 
-Ele lê os logs de sessão que o Claude Code já grava na sua máquina, estima o custo equivalente em dólar e gera uma página HTML com tabelas e gráficos. Tudo local. Nada sai do seu computador.
+A simple dashboard to see how many tokens your Claude Code is burning, project by project.
 
-![CodeBurn](https://img.shields.io/badge/python-3.10%2B-blue) ![deps](https://img.shields.io/badge/depend%C3%AAncias-zero-green)
+It reads the session logs that Claude Code already writes on your machine, estimates the equivalent cost in dollars and generates an HTML page with tables and charts. Everything local. Nothing leaves your computer.
 
-![Dashboard do CodeBurn](docs/dashboard.png)
+![CodeBurn](https://img.shields.io/badge/python-3.10%2B-blue) ![deps](https://img.shields.io/badge/dependencies-zero-green) ![license](https://img.shields.io/badge/license-MIT-green)
 
-*Exemplo com dados de demonstração.*
+![CodeBurn dashboard](docs/dashboard.png)
 
-## Antes de tudo: isso não é a sua fatura
+*Example with demo data.*
 
-Se você usa Claude Pro ou Max, paga assinatura fixa por mês, não por token. Os valores em dólar que aparecem aqui são o **equivalente se você estivesse pagando via API**. Serve como termômetro de intensidade de uso, ótimo pra comparar um projeto com o outro e enxergar onde o consumo está concentrado. Não trate como conta a pagar.
+## First things first: this is not your bill
 
-## Como funciona
+If you use Claude Pro or Max, you pay a fixed monthly subscription, not per token. The dollar figures shown here are the equivalent as if you were paying through the API. Use it as a gauge of usage intensity, great for comparing one project against another and seeing where your consumption is concentrated. Do not treat it as an invoice.
 
-O Claude Code guarda cada sessão em arquivos `.jsonl` dentro de `~/.claude/projects/`. O CodeBurn varre esses arquivos, soma os tokens de cada chamada (input, cache de leitura, cache de escrita, output), aplica a tabela de preços e agrupa por projeto, por modelo, por dia e por sessão.
+## How it works
 
-Na primeira vez ele monta um cache local pra ficar rápido nas próximas. Conforme você usa o Claude Code, é só rodar de novo pra atualizar.
+Claude Code stores each session in `.jsonl` files inside `~/.claude/projects/`. CodeBurn scans those files, adds up the tokens of each call (input, cache read, cache write, output), applies the price table and groups everything by project, model, day and session.
 
-## Requisitos
+The first run builds a local cache so the next ones are fast. As you keep using Claude Code, just run it again to refresh.
 
-- **Python 3.10 ou mais novo.** Em versões antigas ele nem abre.
-- Sem nenhuma biblioteca extra. Só a biblioteca padrão do Python.
-- Conexão com a internet pra renderizar os gráficos (eles usam Chart.js via CDN). As tabelas funcionam offline normalmente.
+## Requirements
 
-## Como usar
+- **Python 3.10 or newer.** On older versions it will not even start.
+- No extra libraries. Just the Python standard library.
+- Internet connection to render the charts (they use Chart.js via CDN). The tables work offline.
 
-Clone ou baixe a pasta, entre nela e rode:
+## Usage
+
+Clone or download the folder, go into it and run:
 
 ```bash
 python codeburn.py
 ```
 
-Isso gera o `report.html` ao lado do script. Abra no navegador e pronto.
+This generates `report.html` next to the script. Open it in your browser and you are done.
 
-Outras opções:
+Other options:
 
 ```bash
-python codeburn.py --days 7      # só os últimos 7 dias
-python codeburn.py --open        # gera e já abre no navegador
-python codeburn.py --json saida.json   # exporta os dados em JSON também
+python codeburn.py --days 7          # last 7 days only
+python codeburn.py --open            # generate and open in the browser
+python codeburn.py --json out.json   # also export the data as JSON
 ```
 
-## Deixe do seu jeito
+## Make it yours
 
-**Agrupar por projeto.** Abra o `codeburn.py` e edite a lista `PROJECT_RULES` lá no topo. Cada linha é um par: uma expressão que casa com o caminho da pasta, e o nome que você quer ver no relatório. A primeira que casar vence. Se nenhuma casar, o relatório usa o próprio caminho da pasta como nome. Os exemplos que vêm no arquivo (Frontend, Backend, Infra) são só ponto de partida, troque pelos seus.
+**Group by project.** Open `codeburn.py` and edit the `PROJECT_RULES` list at the top. Each line is a pair: an expression that matches the folder path, and the name you want to see in the report. The first match wins. If nothing matches, the report uses the folder path itself as the name. The examples that ship with the file (Frontend, Backend, Infra) are just a starting point, swap them for yours.
 
-**Ajustar os preços.** A tabela fica no `pricing.json`. Confira os valores atuais na [página de preços da Anthropic](https://www.anthropic.com/pricing) e ajuste se precisar. Tem também o campo `usd_brl` pra converter pra real, mude pra sua moeda se quiser.
+**Adjust the prices.** The table lives in `pricing.json`. Check the current values on the [Anthropic pricing page](https://www.anthropic.com/pricing) and update if needed. The dashboard footer shows the date the prices were last checked, so you always know how fresh they are. There is also a `usd_brl` field to convert to another currency.
 
-## Privacidade
+## Privacy
 
-O CodeBurn roda inteiro na sua máquina e lê só os seus próprios logs. Ele não envia nada pra lugar nenhum. A única coisa que sai pela rede é o carregamento da biblioteca de gráficos (Chart.js) a partir de um CDN público, e isso é código, não os seus dados.
+CodeBurn runs entirely on your machine and reads only your own logs. It does not send anything anywhere. The only thing that goes over the network is loading the chart library (Chart.js) from a public CDN, and that is code, not your data.
 
-O `report.html` gerado contém os nomes dos seus projetos e o seu consumo. O `.gitignore` já está configurado pra você não subir esse relatório nem o cache por acidente, caso você versione a sua cópia.
+To guess each session's project name, CodeBurn reads the text of your conversations locally. That text never leaves your machine: it is used only for classification and discarded right after. No conversation content is written to the report or transmitted.
 
-## Licença
+The generated `report.html` contains your project names and your usage. The `.gitignore` is already set up so you do not push that report or the cache by accident, in case you version your own copy.
 
-MIT. Use à vontade.
+## License
+
+MIT. Use it freely.
